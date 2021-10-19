@@ -1,0 +1,16 @@
+pipelines:
+  branches:
+    testsite:
+      - step:
+          name: Uploads to nbsportal@schaafnet.com
+          script:
+            - apt-get update
+            - apt-get -qq install git-ftp
+            - git ftp push --user $FTP_USERNAME_TEST --passwd $FTP_PASSWORD_TEST  $FTP_HOST_TEST
+    livesite:
+      - step:
+          name: uploads to live
+          script:
+            - apt-get update
+            - apt-get -qq install git-ftp
+            - git ftp init --user $FTP_USERNAME_LIVE --passwd $FTP_PASSWORD_LIVE  $FTP_HOST_LIVE
